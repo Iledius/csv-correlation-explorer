@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import {
+  Grid,
+  AppBar,
+  Toolbar,
+  List,
+  ListItem,
+  ListItemText,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import FaceIcon from "@material-ui/icons/Face";
 
-function App() {
+import SubmitBox from "./components/SumbitBox";
+import HeaderList from "./components/HeaderList";
+
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    width: "50%",
+    margin: "0px",
+  },
+  toolbar: {
+    marginRight: "90%",
+  },
+}));
+
+const App = () => {
+  const classes = useStyles();
+  const [csvData, handleCsvData] = useState([{}]);
+  const [headers, setHeaders] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AppBar position="relative">
+        <Toolbar className={classes.toolbar}>
+          <FaceIcon className={classes.icon} />
+          <h1 className={classes.icon}>Shitshit</h1>
+        </Toolbar>
+      </AppBar>
+      <Grid container justify="center">
+        <SubmitBox
+          handleCsvData={handleCsvData}
+          setHeaders={setHeaders}
+        ></SubmitBox>
+      </Grid>
+      <HeaderList headers={headers} />
     </div>
   );
-}
+};
 
 export default App;
