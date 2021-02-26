@@ -12,6 +12,7 @@ import FaceIcon from "@material-ui/icons/Face";
 
 import SubmitBox from "./components/SumbitBox";
 import HeaderList from "./components/HeaderList";
+import AnswerList from "./components/AnswerList";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -27,9 +28,10 @@ const App = () => {
   const classes = useStyles();
   const [csvData, handleCsvData] = useState([{}]);
   const [headers, setHeaders] = useState([]);
+  const [activeQuestion, setActiveQuestion] = useState("Aikaleima");
 
   return (
-    <div>
+    <div className="root">
       <AppBar position="relative">
         <Toolbar className={classes.toolbar}>
           <FaceIcon className={classes.icon} />
@@ -42,7 +44,14 @@ const App = () => {
           setHeaders={setHeaders}
         ></SubmitBox>
       </Grid>
-      <HeaderList headers={headers} />
+      <Grid container justify="left" spacing={2}>
+        <Grid>
+          <HeaderList headers={headers} setActiveQuestion={setActiveQuestion} />
+        </Grid>
+        <Grid>
+          <AnswerList csvData={csvData} activeQuestion={activeQuestion} />
+        </Grid>
+      </Grid>
     </div>
   );
 };

@@ -8,38 +8,45 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
+    minWidth: 360,
     backgroundColor: theme.palette.background.default,
     boxShadow: "0 3px 5px 2px rgba(50, 50, 135, .1)",
     padding: "0 10px",
   },
 }));
 
-const HeaderList = (props) => {
+const AnswerList = ({ csvData, activeQuestion }) => {
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [activeAnswers, setActiveAnswers] = React.useState([{}]);
 
-  const handleListItemClick = (event, index, qst) => {
+  const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
-    props.setActiveQuestion(qst);
   };
 
   var v = -1;
 
+  var csvData_unique = [];
+  csvData.forEach((element) => {
+    var answer = element[activeQuestion];
+    if (!csvData_unique.find((ans) => ans === answer))
+      csvData_unique.push(element[activeQuestion]);
+  });
+
   return (
     <div className={classes.root}>
       <List component="nav">
-        {props.headers.map((qst) => {
+        {csvData_unique.map((ans) => {
           v++;
           var value = v;
-
           return (
             <ListItem
               button
               selected={selectedIndex === value}
-              onClick={(event) => handleListItemClick(event, value, qst)}
+              onClick={(event) => handleListItemClick(event, value)}
             >
-              <ListItemText primary={qst} />
-              <ArrowForwardIosIcon fontSize="small" color="" />
+              <ListItemText primary={ans} />
+              <ArrowForwardIosIcon fontSize="small" color="action" />
             </ListItem>
           );
         })}
@@ -47,4 +54,5 @@ const HeaderList = (props) => {
     </div>
   );
 };
-export default HeaderList;
+
+export default AnswerList;
