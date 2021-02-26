@@ -26,18 +26,24 @@ const AnswerList = ({ csvData, activeQuestion }) => {
 
   var v = -1;
 
-  var csvData_unique = [];
+  var csvData_unique = [{}];
   csvData.forEach((element) => {
     var answer = element[activeQuestion];
-    if (!csvData_unique.find((ans) => ans === answer))
-      csvData_unique.push(element[activeQuestion]);
+
+    if (csvData_unique[answer]) {
+      csvData_unique[answer]++;
+    } else {
+      csvData_unique[answer] = 1;
+    }
   });
+  console.log(csvData_unique);
 
   return (
     <div className={classes.root}>
       <List component="nav">
-        {csvData_unique.map((ans) => {
+        {Object.keys(csvData_unique).map((ans) => {
           v++;
+
           var value = v;
           return (
             <ListItem
@@ -45,7 +51,13 @@ const AnswerList = ({ csvData, activeQuestion }) => {
               selected={selectedIndex === value}
               onClick={(event) => handleListItemClick(event, value)}
             >
-              <ListItemText primary={ans} />
+              <ListItemText
+                primary={`${ans} ${
+                  csvData_unique[ans] != 1
+                    ? ` (${csvData_unique[ans]} answers)`
+                    : ""
+                }`}
+              />
               <ArrowForwardIosIcon fontSize="small" color="action" />
             </ListItem>
           );
