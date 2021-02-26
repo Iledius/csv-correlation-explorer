@@ -43,7 +43,7 @@ const AnswerList = ({ csvData, activeQuestion }) => {
       <List component="nav">
         {Object.keys(csvData_unique).map((ans) => {
           v++;
-
+          if (typeof csvData_unique[ans] === "object") return false;
           var value = v;
           return (
             <ListItem
