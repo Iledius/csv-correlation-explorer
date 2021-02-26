@@ -41,14 +41,16 @@ const AnswerList = ({ csvData, activeQuestion }) => {
   return (
     <div className={classes.root}>
       <List component="nav">
-        {Object.keys(csvData_unique).map((ans) => {
+        {Object.keys(csvData_unique.sort()).map((ans) => {
           v++;
           if (typeof csvData_unique[ans] === "object") return false;
           var value = v;
           return (
             <ListItem
               style={{
-                background: `linear-gradient(to right, grey ${
+                background: `linear-gradient(to right, #83c3f7 ${
+                  csvData_unique[ans] / csvData_unique.length - 20
+                }%,#67b7f7 ${
                   csvData_unique[ans] / csvData_unique.length
                 }%,white 0%)`,
               }}
