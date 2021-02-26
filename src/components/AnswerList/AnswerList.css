@@ -1,0 +1,10 @@
+nav li:hover {
+  background: linear-gradient(
+    to right,
+    black 25%,
+    black 25%,
+    #000000 25%,
+    white 25%,
+    white 100%
+  );
+}

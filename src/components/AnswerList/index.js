@@ -27,6 +27,7 @@ const AnswerList = ({ csvData, activeQuestion }) => {
   var v = -1;
 
   var csvData_unique = [{}];
+
   csvData.forEach((element) => {
     var answer = element[activeQuestion];
 
@@ -36,7 +37,6 @@ const AnswerList = ({ csvData, activeQuestion }) => {
       csvData_unique[answer] = 1;
     }
   });
-  console.log(csvData_unique);
 
   return (
     <div className={classes.root}>
@@ -47,6 +47,11 @@ const AnswerList = ({ csvData, activeQuestion }) => {
           var value = v;
           return (
             <ListItem
+              style={{
+                background: `linear-gradient(to right, grey ${
+                  csvData_unique[ans] / csvData_unique.length
+                }%,white 0%)`,
+              }}
               button
               selected={selectedIndex === value}
               onClick={(event) => handleListItemClick(event, value)}
