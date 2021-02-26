@@ -43,15 +43,14 @@ const AnswerList = ({ csvData, activeQuestion }) => {
       <List component="nav">
         {Object.keys(csvData_unique.sort()).map((ans) => {
           v++;
+          console.log(csvData.length);
           if (typeof csvData_unique[ans] === "object") return false;
           var value = v;
           return (
             <ListItem
               style={{
                 background: `linear-gradient(to right, #83c3f7 ${
-                  csvData_unique[ans] / csvData_unique.length - 20
-                }%,#67b7f7 ${
-                  csvData_unique[ans] / csvData_unique.length
+                  (csvData_unique[ans] / csvData.length) * 100
                 }%,white 0%)`,
               }}
               button
