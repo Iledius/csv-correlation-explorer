@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     maxWidth: 360,
+    minWidth: 360,
     backgroundColor: theme.palette.background.default,
     boxShadow: "0 3px 5px 2px rgba(50, 50, 135, .1)",
     padding: "0 10px",
@@ -21,6 +22,8 @@ const HeaderList = (props) => {
   const handleListItemClick = (event, index, qst) => {
     setSelectedIndex(index);
     props.setActiveQuestion(qst);
+    props.hideAnswers(false);
+    props.hideQuestions(true);
   };
 
   var v = -1;
