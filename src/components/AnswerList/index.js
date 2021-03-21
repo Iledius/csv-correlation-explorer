@@ -46,7 +46,7 @@ const AnswerList = ({
   var csvData_unique = [{}];
   csvData.forEach((element) => {
     var answer = element[activeQuestion];
-
+    console.log(answer);
     if (csvData_unique[answer]) {
       csvData_unique[answer]++;
     } else {
@@ -57,7 +57,7 @@ const AnswerList = ({
   return (
     <div className={classes.root}>
       <List component="nav">
-        {Object.keys(csvData_unique.sort()).map((ans) => {
+        {Object.keys(csvData_unique).map((ans) => {
           v++;
 
           // skip loop if null/obj
@@ -76,7 +76,7 @@ const AnswerList = ({
               onClick={(event) => handleListItemClick(event, value, ans)}
             >
               <ListItemText
-                primary={`${ans} ${
+                primary={`${ans === "" ? "Empty answer" : ans} ${
                   csvData_unique[ans] != 1
                     ? ` (${csvData_unique[ans]} answers)`
                     : ""
