@@ -49,7 +49,7 @@ const SubmitBox = (props) => {
               <Button
                 variant={uploadState === "Uploaded" ? "contained" : "outlined"}
                 onClick={() => {
-                  setDrawerState(false);
+                  if (uploadState === "Uploaded") setDrawerState(false);
                 }}
                 color="primary"
               >
