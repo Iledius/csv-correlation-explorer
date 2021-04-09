@@ -21,13 +21,13 @@ const style = {
 function FileZone(props) {
   return (
     <Dropzone
+      accept=".csv"
       padding="20px"
       style="border:1px solid black;"
       onDrop={async (file) => {
         const text = await file[0].text();
         const result = parse(text, { header: true });
         const headers = result.meta.fields;
-        console.log(headers);
         props.handleCsvData((existing) => [...result.data]);
         props.setHeaders((e) => [...headers]);
         props.setUploadState("Uploaded");
